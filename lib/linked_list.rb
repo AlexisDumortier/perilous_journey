@@ -48,4 +48,31 @@ class LinkedList
     list_string
   end
 
+  def prepend(name)
+    temp = @head
+    @head = Node.new(name)
+    @head.next_node = temp
+    @head
+  end
+
+  def insert(pos, name)
+    if pos == 0
+      self.prepend(name)
+    elsif pos == count
+      self.append(name)
+    elsif pos < count
+      temp = self.head
+        (pos-1).times do
+          temp = temp.next_node
+        end
+      insert_next_node = temp.next_node
+      temp.next_node = Node.new(name)
+      temp.next_node.next_node = insert_next_node
+      temp.next_node
+    else
+      puts "can not insert beyond the tail"
+    end
+
+  end
+
 end
