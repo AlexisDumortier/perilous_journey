@@ -23,11 +23,29 @@ class LinkedList
   end
 
   def append(name)
-    @head = Node.new(name)
+    if @head == nil
+      @head = Node.new(name)
+    else
+      temp_node = self.head
+      while temp_node.next_node != nil
+        temp_node = temp_node.next_node
+      end
+      temp_node.next_node = Node.new(name)
+    end
   end
 
   def to_string
-    "The #{@head.surname} family"
+    if @head == nil
+      list_string = ""
+    else
+      list_string = "The #{@head.surname} family"
+      temp_node = self.head
+      while temp_node.next_node != nil
+        list_string = list_string + ", followed by the #{temp_node.next_node.surname} family"
+        temp_node = temp_node.next_node
+      end
+    end
+    list_string
   end
 
 end
