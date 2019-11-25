@@ -2,7 +2,8 @@ require_relative './node'
 
 class LinkedList
 
-  attr_reader :head, :count
+  attr_reader :count
+  attr_accessor :head
 
   def initialize
     @head = nil
@@ -73,6 +74,50 @@ class LinkedList
       puts "can not insert beyond the tail"
     end
 
+  end
+
+  def access_node(node_index)
+    temp_node = self.head
+    node_index.times do
+      temp_node = temp_node.next_node
+    end
+    temp_node
+  end
+
+  def find(pos, num)
+    temp_node = self.access_node(pos)
+    list_string = "The #{temp_node.surname} family"
+    [num-1, self.count-pos-1].min.times do
+      list_string = list_string + ", followed by the #{temp_node.next_node.surname} family"
+      temp_node = temp_node.next_node
+    end
+    list_string
+  end
+
+  def includes?(name)
+    temp_node = self.head
+    while temp_node.next_node != nil
+      if (temp_node.surname == name) || (temp_node.next_node.surname == name)
+        return true
+      end
+      temp_node = temp_node.next_node
+    end
+      return false
+  end
+
+  def pop
+    if self.head == nil
+      puts "Everybody has died"
+      return nil
+    elsif self.head.next_node == nil
+      deleted_node = self.head
+      self.head = nil
+    else
+      deleted_node = self.access_node(self.count-1)
+      self.access_node(self.count-2).next_node = nil
+    end
+    puts "The #{deleted_node.surname} family has died of dysentery"
+    deleted_node
   end
 
 end

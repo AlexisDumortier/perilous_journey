@@ -66,4 +66,32 @@ class LinkedListTest < Minitest::Test
     assert_equal node2, node3.next_node
   end
 
+  def test_can_find_elements
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("Henderson")
+    list.append("Lawson")
+    list.append("Chapman")
+    assert_equal "The Henderson family", list.find(1,1)
+    assert_equal "The Lawson family, followed by the Chapman family", list.find(2,2)
+    assert_equal "The Lawson family, followed by the Chapman family", list.find(2,3)
+  end
+
+  def test_includes
+    list = LinkedList.new
+    list.append("Brooks")
+    list.append("Henderson")
+    assert_equal true, list.includes?("Brooks")
+    assert_equal false, list.includes?("Bob")
+  end
+
+  def test_pop
+    list = LinkedList.new
+    list.append("Brooks")
+    node2 = list.append("Henderson")
+    node3 = list.append("Chapman")
+    assert_equal node3, list.pop
+    assert_equal node2, list.pop
+    assert_nil list.head.next_node
+  end
 end
