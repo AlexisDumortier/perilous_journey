@@ -23,15 +23,15 @@ class LinkedList
     end
   end
 
-  def append(name)
+  def append(name, supply)
     if @head == nil
-      @head = Node.new(name)
+      @head = Node.new(name, supply)
     else
       temp_node = self.head
       while temp_node.next_node != nil
         temp_node = temp_node.next_node
       end
-      temp_node.next_node = Node.new(name)
+      temp_node.next_node = Node.new(name, supply)
     end
   end
 
@@ -49,25 +49,25 @@ class LinkedList
     list_string
   end
 
-  def prepend(name)
+  def prepend(name, supply)
     temp = @head
-    @head = Node.new(name)
+    @head = Node.new(name, supply)
     @head.next_node = temp
     @head
   end
 
-  def insert(pos, name)
+  def insert(pos, name, supply)
     if pos == 0
-      self.prepend(name)
+      self.prepend(name, supply)
     elsif pos == count
-      self.append(name)
+      self.append(name, supply)
     elsif pos < count
       temp = self.head
         (pos-1).times do
           temp = temp.next_node
         end
       insert_next_node = temp.next_node
-      temp.next_node = Node.new(name)
+      temp.next_node = Node.new(name, supply)
       temp.next_node.next_node = insert_next_node
       temp.next_node
     else
