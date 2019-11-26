@@ -32,4 +32,14 @@ class WagonTrain
     total_supply
   end
 
+  def go_hunting
+    hunt = {'squirrel' => rand(5), 'deer'=> rand(5), 'bison' => rand(5)}
+    hunt_load = hunt['squirrel']*2 + hunt['deer']*40 + hunt['bison']*100
+    self.list.head.supplies["pounds of food"] += hunt_load
+
+    puts "You got #{hunt['squirrel']} squirrel#{'s' if hunt['squirrel'] > 1}," \
+    " #{hunt['deer']} deer#{'s' if hunt['deer'] > 1} and #{hunt['bison']}" \
+    " bison#{'s' if hunt['bison'] > 1} for #{hunt_load} "\
+    "pound#{'s' if hunt_load > 1} of food"
+  end
 end
